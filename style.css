@@ -261,3 +261,115 @@ footer {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
     border: 1px solid #e2e8f0;
 }
+/* ===================================================
+   Flashcards (Mitos e Verdades)
+   =================================================== */
+
+.flashcard-instruction {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.flashcard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.flashcard {
+    background-color: transparent;
+    height: 260px;
+    perspective: 1000px; /* Cria a profundidade 3D */
+    cursor: pointer;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Efeito ao passar o mouse ou tocar */
+.flashcard:hover .flashcard-inner,
+.flashcard:focus .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+/* Frente do Cartão */
+.flashcard-front {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    color: #1e293b;
+}
+
+.card-tag {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #3b82f6;
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.flashcard-front p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Verso do Cartão */
+.flashcard-back {
+    background-color: #f1f5f9;
+    color: #334155;
+    transform: rotateY(180deg);
+}
+
+.card-badge {
+    display: inline-block;
+    padding: 0.25rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.card-badge.mito {
+    background-color: #fef2f2;
+    color: #ef4444;
+    border: 1px solid #fca5a5;
+}
+
+.card-badge.verdade {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #86efac;
+}
+
+.flashcard-back p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
