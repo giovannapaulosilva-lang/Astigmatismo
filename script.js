@@ -1,97 +1,92 @@
-// JavaScript Code for Quiz Functionality
 const quizData = [
     {
-        question: "1. O que é o astigmatismo?",
+        question: "1. O que causa o astigmatismo?",
         options: [
-            "Um erro de refração que causa visão borrada devido à curvatura irregular da córnea ou cristalino",
-            "Uma infecção ocular causada por bactérias nas lentes de contato",
-            "A perda total da visão de cores em ambientes escuros",
-            "Um aumento da pressão interna do olho"
+            "Aumento da pressão interna do olho",
+            "Curvatura irregular da córnea ou cristalino (formato ovalado)",
+            "Opacidade do cristalino pela idade",
+            "Falta de exercícios oculares"
         ],
-        correct: 0
+        correct: 1
     },
     {
-        question: "2. Quem foi o primeiro a descrever o astigmatismo em 1801?",
+        question: "2. Quem descreveu o astigmatismo pela primeira vez em 1801?",
         options: [
             "George Biddell Airy",
             "William Whewell",
             "Thomas Young",
-            "Isaac Newton"
+            "Albert Einstein"
         ],
         correct: 2
     },
     {
-        question: "3. Qual a origem e o significado da palavra 'astigmatismo'?",
+        question: "3. Qual foi a criação de George Biddell Airy em 1825 para corrigir o astigmatismo?",
         options: [
-            "Do latim, significa 'olho grande'",
-            "Do grego a- (sem) e stigma (ponto), significando 'sem ponto focal'",
-            "Do francês, significa 'visão dupla'",
-            "Do inglês, significa 'curvatura irregular'"
+            "Cirurgia a laser",
+            "Lente cilíndrica",
+            "Lente bifocal",
+            "Colírios tóricos"
         ],
         correct: 1
     },
     {
-        question: "4. Quais são as opções de tratamento para o astigmatismo?",
+        question: "4. Quais são sintomas comuns do astigmatismo?",
         options: [
-            "Apenas colírios e repouso",
-            "Óculos de grau, lentes de contato tóricas e cirurgia refrativa a laser",
-            "Apenas uso de tampão ocular",
-            "Transplante total de retina"
+            "Apenas dor nos olhos ao acordar",
+            "Visão embaçada, fadiga ocular e dores de cabeça",
+            "Visão dupla exclusivamente noturna",
+            "Perda total de visão para cores"
         ],
         correct: 1
-    },
-    {
-        question: "5. Quais são os sintomas clássicos do astigmatismo?",
-        options: [
-            "Visão borrada de perto/longe, dores de cabeça e fadiga ocular",
-            "Febre alta e olhos vermelhos",
-            "Perda imediata da audição",
-            "Incapacidade de piscar"
-        ],
-        correct: 0
     }
 ];
 
 let currentQuestion = 0;
 let score = 0;
+let selectedOption = null;
 
-function loadQuestion() {
-    const quizContainer = document.getElementById("quiz-container");
+const quizContainer = document.getElementById("quiz-container");
+
+function loadQuiz() {
+    selectedOption = null;
     const q = quizData[currentQuestion];
     
-    let html = `<div class="question-box">
-        <h3>${q.question}</h3>
-        <div class="options">`;
-        
-    q.options.forEach((opt, idx) => {
-        html += `<button class="quiz-option" onclick="selectOption(${idx})">${opt}</button>`;
+    let html = `<div class="quiz-question"><strong>${q.question}</strong></div><ul class="quiz-options" style="list-style:none; padding:0;">`;
+    
+    q.options.forEach((opt, index) => {
+        html += `<li class="quiz-option" onclick="selectOption(${index})">${opt}</li>`;
     });
     
-    html += `</div></div>`;
+    html += `</ul><button class="quiz-btn" onclick="nextQuestion()" id="next-btn" disabled style="opacity:0.5;">Responder / Próxima</button>`;
+    
     quizContainer.innerHTML = html;
 }
 
 function selectOption(index) {
-    if (index === quizData[currentQuestion].correct) {
-        score++;
-    }
-    currentQuestion++;
-    
-    if (currentQuestion < quizData.length) {
-        loadQuestion();
-    } else {
-        showResult();
-    }
+    selectedOption = index;
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach((opt, i) => {
+        if (i === index) opt.classList.add('selected');
+        else opt.classList.remove('selected');
+    });
+    const btn = document.getElementById('next-btn');
+    btn.disabled = false;
+    btn.style.opacity = '1';
 }
 
-function showResult() {
-    const quizContainer = document.getElementById("quiz-container");
+function nextQuestion() {
+    if (selectedOption === quizData[currentQuestion].correct) score++;
+    currentQuestion++;
+    if (currentQuestion < quizData.length) loadQuiz();
+    else showResults();
+}
+
+function showResults() {
     quizContainer.innerHTML = `
-        <div class="result-box">
-            <h3>Quiz Concluído! 🎉</h3>
-            <p class="score-text">Você acertou ${score} de ${quizData.length} perguntas.</p>
-            <p>${score >= 3 ? "Parabéns! Você aprendeu bastante sobre o astigmatismo." : "Que tal revisar o conteúdo da página e tentar novamente?"}</p>
-            <button class="quiz-btn" onclick="restartQuiz()">Refazer Quiz</button>
+        <div style="text-align:center;">
+            <h3>Resultado do Quiz</h3>
+            <p>Você acertou <strong>${score}</strong> de <strong>${quizData.length}</strong> perguntas!</p>
+            <button class="quiz-btn" onclick="restartQuiz()">Tentar Novamente</button>
         </div>
     `;
 }
@@ -99,10 +94,7 @@ function showResult() {
 function restartQuiz() {
     currentQuestion = 0;
     score = 0;
-    loadQuestion();
+    loadQuiz();
 }
 
-// Inicializar Quiz
-document.addEventListener("DOMContentLoaded", () => {
-    loadQuestion();
-});
+document.addEventListener('DOMContentLoaded', loadQuiz);
