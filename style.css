@@ -1,1 +1,250 @@
+/* CSS Stylesheet for Astigmatismo Webpage */
+:root {
+    --primary-color: #0056b3;
+    --secondary-color: #008080;
+    --accent-color: #e6f2ff;
+    --dark-text: #2c3e50;
+    --light-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 12px;
+}
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-text);
+    background-color: var(--light-bg);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 40px 0 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+.student-info {
+    background: rgba(255, 255, 255, 0.15);
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+}
+
+nav {
+    background-color: #1a252f;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: block;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background-color: var(--primary-color);
+}
+
+main {
+    padding: 30px 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Ilustração de olho */
+.eye-illustration {
+    display: flex;
+    gap: 20 px;
+    margin-top: 25 px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.eye-box {
+    flex: 1;
+    min-width: 250 px;
+    padding: 20 px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    background: var(--accent-color);
+    border: 2 px solid #bce0fd;
+}
+
+.eye-label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1 rem;
+    margin-bottom: 10 px;
+    color: var(--primary-color);
+}
+
+/* Linha do Tempo */
+.timeline {
+    margin-top: 20 px;
+    border-left: 4 px solid var(--primary-color);
+    padding-left: 20 px;
+}
+
+.timeline-item {
+    margin-bottom: 25 px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28 px;
+    top: 5 px;
+    width: 12 px;
+    height: 12 px;
+    background-color: var(--primary-color);
+    border-radius: 50 %;
+}
+
+.year {
+    font-weight: bold;
+    color: var(--secondary-color);
+    font-size: 1.2 rem;
+}
+
+/* Listas */
+.symptoms-list, .advances-list {
+    list-style: none;
+    padding-left: 10 px;
+}
+
+.symptoms-list li, .advances-list li {
+    padding: 10 px 0;
+    border-bottom: 1 px solid #eee;
+}
+
+/* Tratamentos */
+.treatment-grid {
+    display: grid;
+    grid-template-columns: repeat (auto-fit, minmax (250 px, 1 fr));
+    gap: 20 px;
+    margin-top: 20 px;
+}
+
+.treatment-card {
+    background: #f0f7ff;
+    padding: 20 px;
+    border-radius: var(--border-radius);
+    border-left: 5 px solid var(--primary-color);
+}
+
+.treatment-card h3 {
+    margin-bottom: 10 px;
+    color: var(--primary-color);
+}
+
+/* Quiz Styles */
+.quiz-section {
+    background: #fdfefe;
+    border: 2 px solid var(--accent-color);
+}
+
+.quiz-option {
+    display: block;
+    width: 100 %;
+    padding: 12 px 15 px;
+    margin: 10 px 0;
+    background-color: #f8f9fa;
+    border: 2 px solid #e9ecef;
+    border-radius: 8 px;
+    text-align: left;
+    font-size: 1 rem;
+    cursor: pointer;
+    transition: all 0.2 s;
+}
+
+.quiz-option:hover {
+    background-color: var(--accent-color);
+    border-color: var(--primary-color);
+}
+
+.quiz-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12 px 25 px;
+    font-size: 1 rem;
+    border-radius: 8 px;
+    cursor: pointer;
+    margin-top: 15 px;
+}
+
+.quiz-btn:hover {
+    background-color: #004085;
+}
+
+.result-box {
+    text-align: center;
+    padding: 20 px;
+}
+
+.score-text {
+    font-size: 1.5 rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin: 15 px 0;
+}
+
+footer {
+    background-color: #1a252f;
+    color: white;
+    text-align: center;
+    padding: 20 px 0;
+    margin-top: 40 px;
+}
